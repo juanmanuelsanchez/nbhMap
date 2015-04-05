@@ -1,0 +1,1 @@
+Creates an interactive neighbourhood map with restaurant suggestions
