@@ -1,4 +1,15 @@
 @charset "UTF-8";
+* {box-sizing:border-box;}
+body { background-color: #CCC; font-family: sans-serif; font-size: 14px; line-height: 1.6em; margin: 0; padding: 0; }
+input { font-size: 20px; padding: 10px; border: 1px solid #CCC; display: block; margin: 20px 0; }
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-no-suggestion { padding: 2px 5px;}
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: bold; color: #000; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
 /* Simple fluid media
    Note: Fluid media requires that you remove the media's height and width attributes from the HTML
    http://www.alistapart.com/articles/fluid-images/ 
@@ -42,6 +53,23 @@ img, object, embed, video {
     padding:0;        
 }
 
+.title {
+	margin:0;
+}
+.foursquare-container {
+    padding: 10px;
+    margin-right:300px;
+    background-color: rgba(255,255,255,0.7);
+}
+#mapDiv {
+	height:400px;
+	width:80%;
+	margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+	padding:0px;
+	text-align:center;
+}
 /* Mobile Layout: 480px and below. */
   
 .gridContainer {

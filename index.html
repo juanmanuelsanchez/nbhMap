@@ -10,6 +10,7 @@
 <title>nbhMap</title>
 <link href="css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <!-- 
 To learn more about the conditional comments around the html tags at the top of the file:
 paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
@@ -23,11 +24,23 @@ Do the following if you're using your customized build of modernizr (http://www.
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="js/respond.min.js"></script>
+<script src="js/libs/respond.min.js"></script>
 </head>
 <body>
 	<div class="gridContainer clearfix">
-		<div id="div1" class="fluid">Use Insert Panel for additional Fluid Grid Layout Elements. Note: All Fluid Layout tags must be contained within the "gridContainer" div tag.</div>
+        <h4 class="title fluid">SEARCH:</h4>
+      <div id="search-bar" class="fluid">
+        <input type="text" id="autocomplete" class="fluid"/>
+      </div>
+      <div id="selection" class="fluid">Selection</div>
+      <div class="foursquare-container fluid">
+        <h3 id="foursquare-header" class="title fluid">Foursquare recommended places:</h3>
+        <ul id="places-list" class="fluidList">Listado de sitios</ul>
+      </div>
+	  <div id="map-canvas" class="fluid">Map</div>
 	</div>
+ <script src="js/libs/jquery.min.js"></script>
+ <script src="js/libs/jquery.autocomplete.min.js"></script>
+ <script src="js/main.js"></script>
 </body>
 </html>
