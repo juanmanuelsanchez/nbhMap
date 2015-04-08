@@ -18,6 +18,9 @@ img, object, embed, video {
 	max-width: 100%;
 }
 
+li {
+	cursor:pointer;
+}
 /* IE 6 does not support max-width so default to width 100% */
 .ie6 img {
 	width:100%;
