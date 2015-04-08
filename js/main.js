@@ -147,6 +147,7 @@
 			var filteredPlace;
 		    var elem;
 			var i=0;
+			var pinPosterPlaces=[];
 		    var length=filteredPlaces.length;
 			    placesList.innerHTML=" ";
 				for(i; i<length; i++) {
@@ -154,14 +155,14 @@
 					filteredPlace= filteredPlaces[i];
 					elem= document.createElement('li');
 					elem.textContent= filteredPlace;
-					
+					pinPosterPlaces.push(filteredPlace);
 					elem.addEventListener('click',(function (placeCopy) {
 						
 						return function() {
 							
-							octopus.setPinPosterLocations(placeCopy);
-							//here migth be something related to the marker
-							view.renderMap();
+							//octopus.setPinPosterLocations(placeCopy);
+							//here migth be something related to the marker-->setAnimation?
+							
 						}
 						
 						
@@ -170,6 +171,8 @@
 					placesList.appendChild(elem);
 				    	
 				}
+				octopus.setPinPosterLocations(pinPosterPlaces);
+				view.renderMap();
 			
 		},
 		
