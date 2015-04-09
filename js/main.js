@@ -8,6 +8,7 @@
 		foursquareData:[],
 		filteredPlaces:[],
 		pinPosterLocations:[],
+		animation:null,
 		
 	};
 	
@@ -60,6 +61,16 @@
 			
 			
 		},
+
+		setAnimation: function(animation) {
+
+			model["animation"]=animation;
+		},
+
+		getAnimation: function() {
+
+			return model.animation;
+		},
 		
 		
 		
@@ -104,7 +115,7 @@
             octopus.setFoursquareData(foursquareContent);
             view.filterData();
 
-         })
+         });
 
 
              return false;
@@ -161,8 +172,8 @@
 						return function() {
 							
 							//octopus.setPinPosterLocations(placeCopy);
-							//here migth be something related to the marker-->setAnimation?
-							
+							//here might be something related to the marker-->setAnimation?
+							//octopus.setAnimation("google.maps.Animation.BOUNCE");
 						}
 						
 						
@@ -193,7 +204,7 @@
 			 var locations=[];
 			 locations= octopus.getPinPosterLocations();
 			 console.log(locations);
-
+        
 			 return locations;	
 				
 			}
@@ -209,7 +220,14 @@
 			  var marker = new google.maps.Marker({
                 map: map,
                 position: placeData.geometry.location,
-                title: name+ ", " +address
+                title: name+ ", " +address,
+                animation: function () {
+
+                	var movement= octopus.getAnimation();
+
+                    console.log(movement);
+                	return movement;
+                }
               });
       	
 				
@@ -256,7 +274,7 @@
 
                var request = {
                query: locations[place]
-               }
+               };
 
             service.textSearch(request, callback);
             }
