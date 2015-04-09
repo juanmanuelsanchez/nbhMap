@@ -178,12 +178,105 @@
 		
 		renderMap: function() {
 			
+			var map;
+			var locations;
+			var markers=[];
+			var mapOptions= {
+				
+				disableDefaultUI: false,
+				
+			};
 			
-			var locations= octopus.getPinPosterLocations();
-			console.log(locations);
+			map= new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
+			
+			function locationFinder() {
+			 var locations=[];
+			 locations= octopus.getPinPosterLocations();
+			 console.log(locations);
+
+			 return locations;	
+				
+			}
+			
+			function createMapMarker(placeData) {
+			  
+			  var lat = placeData.geometry.location.lat();  
+              var lon = placeData.geometry.location.lng();  
+              var address = placeData.formatted_address;
+			  var name= placeData.name;   
+              var bounds = window.mapBounds;
+			  
+			  var marker = new google.maps.Marker({
+                map: map,
+                position: placeData.geometry.location,
+                title: name+ ", " +address
+              });
+      	
+				
+				markers.push(marker);
+				
+				
+				var infoWindow = new google.maps.InfoWindow({
+                  content: name+ ", " +address
+              });
+			  
+			   google.maps.event.addListener(marker, 'click', function() {
+                infoWindow.open(map, marker);
+              });
+
+               bounds.extend(new google.maps.LatLng(lat, lon));
+    
+               map.fitBounds(bounds);
+
+               map.setCenter(bounds.getCenter());
+  
+           }
+		   
+		   
+		   function callback(results, status) {
+              //var i=0;
+              //var length= results.length;
+              //console.log(length);
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                
+				createMapMarker(results[0]);
+                //for(i; i<length; i++ ) {
+         
+                //createMapMarker(results[i]);
+
+               // }
+              }
+           }
+
+           function pinPoster(locations) {
+       
+            var service = new google.maps.places.PlacesService(map);
+    
+            for (place in locations) {
+
+               var request = {
+               query: locations[place]
+               }
+
+            service.textSearch(request, callback);
+            }
+          }
 			
 			
-		},
+		  window.mapBounds = new google.maps.LatLngBounds();
+
+  
+           locations = locationFinder();
+           pinPoster(locations);
+
+       
+
+           window.addEventListener('resize', function(e) {
+           map.fitBounds(mapBounds);
+          
+          })	
+		  
+	  },
 		
     };
 	

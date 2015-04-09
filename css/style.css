@@ -73,6 +73,14 @@ li {
 	padding:0px;
 	text-align:center;
 }
+
+#map-canvas {
+	
+	display:block;
+	height:100%;
+	margin-left:5%;
+	margin-right:5%;
+}
 /* Mobile Layout: 480px and below. */
   
 .gridContainer {
