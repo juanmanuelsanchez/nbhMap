@@ -19,7 +19,23 @@ img, object, embed, video {
 }
 
 li {
-	cursor:pointer;
+   cursor:pointer;
+  padding: 10px 10px 0 10px;
+  border-bottom: 1px dotted black;
+  opacity: 0.9;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition:    all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+li:hover {
+  background: #FDF6E3;
+  opacity: 1;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
 }
 /* IE 6 does not support max-width so default to width 100% */
 .ie6 img {
