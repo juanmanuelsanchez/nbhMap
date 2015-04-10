@@ -129,7 +129,6 @@
 			var i=0;
 			var length= places.length;
 			var locations=[];
-		    var filteredLocations=[];
 			    
 			for(i; i<length; i++) {
 				
@@ -142,10 +141,19 @@
 			   locations.push(location);
 			   
 			}
-			
-			filteredLocations= locations.slice(5,-3);
-			octopus.setFilteredPlaces(filteredLocations);
-			view.renderList();
+			console.log(locations);
+
+
+           locations.splice(1,1);
+           locations.splice(3,1);
+           locations.splice(5,1);
+           locations.splice(7,1);
+           locations.splice(8,1);
+
+           console.log(locations);
+
+           octopus.setFilteredPlaces(locations);
+           view.renderList();
 			
 			
 		},
@@ -161,12 +169,15 @@
 			var pinPosterPlaces=[];
 		    var length=filteredPlaces.length;
 			    placesList.innerHTML=" ";
+		    //Create the map here
+
 				for(i; i<length; i++) {
 					
 					filteredPlace= filteredPlaces[i];
 					elem= document.createElement('li');
 					elem.textContent= filteredPlace;
 					pinPosterPlaces.push(filteredPlace);
+				    //call to pinPoster(filteredPlace) from here
 					elem.addEventListener('click',(function (placeCopy) {
 						
 						return function() {
@@ -184,6 +195,9 @@
 				}
 				octopus.setPinPosterLocations(pinPosterPlaces);
 				view.renderMap();
+                //Or create map here
+                //Check for markers? There might be a reference to the markers
+                //Hint: indexOf() inside a loop?
 			
 		},
 		
@@ -232,6 +246,7 @@
       	
 				
 				markers.push(marker);
+                console.log(markers);
 				
 				
 				var infoWindow = new google.maps.InfoWindow({
