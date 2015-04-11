@@ -11,7 +11,7 @@
 <link href="css/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-<!-- 
+<!--
 To learn more about the conditional comments around the html tags at the top of the file:
 paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 
@@ -19,7 +19,7 @@ Do the following if you're using your customized build of modernizr (http://www.
 * insert the link to your js here
 * remove the link below to the html5shiv
 * add the "no-js" class to the html tags at the top
-* you can also remove the link to respond.min.js if you included the MQ Polyfill in your modernizr build 
+* you can also remove the link to respond.min.js if you included the MQ Polyfill in your modernizr build
 -->
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -32,14 +32,17 @@ Do the following if you're using your customized build of modernizr (http://www.
       <div id="search-bar" class="fluid">
         <input type="text" id="autocomplete" class="fluid"/>
       </div>
-      <div id="selection" class="fluid">Selection</div>
+      <div id="panel">
+        <button id="hide">Hide markers</button>
+        <button id="show">Show markers</button>
+      </div>
       <div class="foursquare-container fluid">
         <h3 id="foursquare-header" class="title fluid">Foursquare recommended places:</h3>
         <ul id="places-list" class="fluidList"></ul>
       </div>
       <div id="mapDiv" class="fluid"></div>
 	</div>
-    
+
  <script src="js/libs/jquery.min.js"></script>
  <script src="js/libs/jquery.autocomplete.min.js"></script>
  <script src="js/main.js"></script>
