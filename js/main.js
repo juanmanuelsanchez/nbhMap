@@ -7,8 +7,9 @@
 		cities:["Bilbao"],
 		foursquareData:[],
 		filteredPlaces:[],
+        filteredNames:[],
 		pinPosterLocations:[],
-		animation:null,
+		animation:"google.maps.Animation.BOUNCE"
 		
 	};
 	
@@ -71,7 +72,17 @@
 
 			return model.animation;
 		},
-		
+
+        setFilteredNames: function(names) {
+
+           model["filteredNames"]=names;
+        },
+
+
+       getFilteredNames: function() {
+
+         return model.filteredNames;
+       }
 		
 		
 		
@@ -129,6 +140,7 @@
 			var i=0;
 			var length= places.length;
 			var locations=[];
+            var placeNames=[];
 			    
 			for(i; i<length; i++) {
 				
@@ -139,9 +151,11 @@
 			   var location= name+ ' , ' +address+ ' , ' +city+ ' , ' +country;
 			   
 			   locations.push(location);
+               placeNames.push(name);
 			   
 			}
-			console.log(locations);
+			//console.log(locations);
+            //console.log(placeNames);
 
 
            locations.splice(1,1);
@@ -150,9 +164,18 @@
            locations.splice(7,1);
            locations.splice(8,1);
 
-           console.log(locations);
+          placeNames.splice(1,1);
+          placeNames.splice(3,1);
+          placeNames.splice(5,1);
+          placeNames.splice(7,1);
+          placeNames.splice(8,1);
+
+          //console.log(locations);
+          console.log(placeNames);
 
            octopus.setFilteredPlaces(locations);
+           octopus.setFilteredNames(placeNames);
+
            view.renderList();
 			
 			
@@ -160,8 +183,9 @@
 		
 		renderList: function() {
 			var filteredPlaces=[];
-			filteredPlaces= octopus.getFilteredPlaces();
+			//filteredPlaces= octopus.getFilteredPlaces();
 			//console.log(filteredPlaces);
+            filteredPlaces= octopus.getFilteredNames();
 			var placesList=document.getElementById("places-list");
 			var filteredPlace;
 		    var elem;
@@ -170,6 +194,16 @@
 		    var length=filteredPlaces.length;
 			    placesList.innerHTML=" ";
 		    //Create the map here
+            var map;
+            var locations;
+            var markers=[];
+            var mapOptions= {
+
+              disableDefaultUI: false
+
+            };
+
+          map= new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
 
 				for(i; i<length; i++) {
 					
@@ -184,7 +218,24 @@
 							
 							//octopus.setPinPosterLocations(placeCopy);
 							//here might be something related to the marker-->setAnimation?
-							//octopus.setAnimation("google.maps.Animation.BOUNCE");
+							//octopus.setAnimation(google.maps.Animation.BOUNCE);
+                            //console.log(markers);
+                           console.log(placeCopy);
+                            var j=0;
+                            var length= markers.length;
+                            for(j; j<length; j++) {
+
+                              var marker= markers[j];
+
+                              if(placeCopy===marker.title) {
+
+                                marker.setAnimation(google.maps.Animation.BOUNCE);
+
+                              }
+
+
+                            }
+
 						}
 						
 						
@@ -194,30 +245,31 @@
 				    	
 				}
 				octopus.setPinPosterLocations(pinPosterPlaces);
-				view.renderMap();
+				//view.renderMap();
                 //Or create map here
                 //Check for markers? There might be a reference to the markers
                 //Hint: indexOf() inside a loop?
 			
-		},
+		//},
 		
-		renderMap: function() {
+		//renderMap: function() {
 			
-			var map;
+			/*var map;
 			var locations;
 			var markers=[];
 			var mapOptions= {
 				
-				disableDefaultUI: false,
+				disableDefaultUI: false
 				
 			};
 			
-			map= new google.maps.Map(document.getElementById("mapDiv"), mapOptions);
+			map= new google.maps.Map(document.getElementById("mapDiv"), mapOptions);*/
 			
 			function locationFinder() {
 			 var locations=[];
-			 locations= octopus.getPinPosterLocations();
-			 console.log(locations);
+			 //locations= octopus.getPinPosterLocations();
+             locations= octopus.getFilteredPlaces();
+			 //console.log(locations);
         
 			 return locations;	
 				
@@ -227,30 +279,31 @@
 			  
 			  var lat = placeData.geometry.location.lat();  
               var lon = placeData.geometry.location.lng();  
-              var address = placeData.formatted_address;
+              //var address = placeData.formatted_address;
 			  var name= placeData.name;   
               var bounds = window.mapBounds;
 			  
 			  var marker = new google.maps.Marker({
                 map: map,
                 position: placeData.geometry.location,
-                title: name+ ", " +address,
-                animation: function () {
+                title: name//+ ", " +address,
+                /*animation: function () {
 
-                	var movement= octopus.getAnimation();
+                  var movement = octopus.getAnimation();
 
-                    console.log(movement);
-                	return movement;
-                }
+                  console.log(movement);
+                  return movement;
+                }*/
               });
       	
 				
 				markers.push(marker);
                 console.log(markers);
+                //marker.animation();
 				
 				
 				var infoWindow = new google.maps.InfoWindow({
-                  content: name+ ", " +address
+                  content: name//+ ", " +address
               });
 			  
 			   google.maps.event.addListener(marker, 'click', function() {
@@ -294,8 +347,28 @@
             service.textSearch(request, callback);
             }
           }
-			
-			
+
+          function setAllMap(map) {
+            var j=0;
+            var length= markers.length;
+            for(j; j<length; j++) {
+
+              markers[j].setMap(map);
+            }
+
+          }
+
+		  function showMarkers() {
+
+			setAllMap(map);
+
+		  }
+
+          function clearMarkers() {
+
+            setAllMap(null);
+          }
+
 		  window.mapBounds = new google.maps.LatLngBounds();
 
   
@@ -311,7 +384,7 @@
 		  
 	  },
 		
-    };
+   };
 	
 	
 	
