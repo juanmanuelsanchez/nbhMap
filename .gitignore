@@ -1,4 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/*.xml
 _notes
+**/.idea/workspace.xml 
+**/.idea/misc.xml
+**/.idea/modules.xml
+**/.idea/nbhMap.iml
+**/.idea/vcs.xml
 
