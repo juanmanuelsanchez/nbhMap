@@ -141,6 +141,7 @@
 			var length= places.length;
 			var locations=[];
             var placeNames=[];
+            var replaces=[];
 			    
 			for(i; i<length; i++) {
 				
@@ -171,10 +172,41 @@
           placeNames.splice(8,1);
 
           //console.log(locations);
+          //console.log(placeNames);
+          placeNames.sort();
           console.log(placeNames);
+		  /*var a= ["Wasabi Restaurante Japonés","Sumo Ledesma","Restaurante Sakura","Kuma","SUMO Pozas",
+		  "Mao Restaurante", "Asia Chic", "Sushi Artist"];*/
+
+          var regEx1=/Kuma/g;
+          var regEx2=/Mao Restaurante/g;
+          var regEx3=/SUMO Ledesma/g;
+          var regEx4=/SUMO Poza/g;
+          var regEx5=/Sakura/g;
+          var regEx6=/Wasabi Bilbao Restaurante Japones/g;
+
+
+		  var replace1= placeNames[0];
+          var replace2= placeNames[1].replace(regEx1, "KUMA");
+          var replace3= placeNames[2].replace(regEx2, "Mao");
+		  var replace4= placeNames[3].replace(regEx3, "SUMO");
+          var replace5= placeNames[4].replace(regEx4, "SUMO Pozas");
+		  var replace6= placeNames[5].replace(regEx5, "Restaurante Sakura");
+          var replace7= placeNames[6];//Sushi Artist
+          var replace8= placeNames[7].replace(regEx6, "Restaurante Wasabi Bilbao");
+		  replaces.push(replace1);
+		  replaces.push(replace2);
+		  replaces.push(replace3);
+		  replaces.push(replace4);
+		  replaces.push(replace5);
+		  replaces.push(replace6);
+          replaces.push(replace7);
+          replaces.push(replace8);
+		  console.log(replaces);
 
            octopus.setFilteredPlaces(locations);
-           octopus.setFilteredNames(placeNames);
+           //octopus.setFilteredNames(placeNames);
+          octopus.setFilteredNames(replaces);
 
            view.renderList();
 			
