@@ -243,6 +243,19 @@
 
                   lookup:filteredLocations,
                   minChars: 1,
+                  onSearchComplete: function(filteredLocations,suggestions) {
+                    console.log(suggestions);
+                    var listSuggestions=[];
+
+                    for(suggestion in suggestions){
+
+                      var location= suggestions[suggestion].value;
+                      listSuggestions.push(location);
+                    }
+                    clearMarkers();
+                    pinPoster(listSuggestions);
+
+                  },
                   onSelect: function(suggestion) {
                      var newList=[];
                      var newLocation= suggestion.value;
