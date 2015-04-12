@@ -180,7 +180,7 @@
 
           var regEx1=/Kuma/g;
           var regEx2=/Mao Restaurante/g;
-          var regEx3=/SUMO Ledesma/g;
+          //var regEx3=/SUMO Ledesma/g;
           var regEx4=/SUMO Poza/g;
           var regEx5=/Sakura/g;
           var regEx6=/Wasabi Bilbao Restaurante Japones/g;
@@ -189,7 +189,7 @@
 		  var replace1= placeNames[0];
           var replace2= placeNames[1].replace(regEx1, "KUMA");
           var replace3= placeNames[2].replace(regEx2, "Mao");
-		  var replace4= placeNames[3].replace(regEx3, "SUMO");
+		  var replace4= placeNames[3];//.replace(regEx3, "SUMO");
           var replace5= placeNames[4].replace(regEx4, "SUMO Pozas");
 		  var replace6= placeNames[5].replace(regEx5, "Restaurante Sakura");
           var replace7= placeNames[6];//Sushi Artist
@@ -330,7 +330,7 @@
 			}
 
 			function createMapMarker(placeData) {
-
+              //console.log(placeData);
 			  var lat = placeData.geometry.location.lat();
               var lon = placeData.geometry.location.lng();
               //var address = placeData.formatted_address;
