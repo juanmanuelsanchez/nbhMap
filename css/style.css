@@ -86,22 +86,31 @@ li:hover {
 	width: 95%;
 	margin-left: 2%;
     margin-top: 2%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 	padding:0px;
 	text-align:center;
 
 }
-
+/*
 #panel {
 
   position: absolute;
-  top: 5px;
+  top:5px;
   left: 70%;
   margin-left: -200px;
   z-index: 5;
   background-color: #fff;
   padding: 5px;
   border: 1px solid #999;
+}*/
+
+#panel {
+
+  margin-top: 0%;
+  margin-bottom: 5%;
+  text-align: center;
+  z-index: 5;
+
 }
 
 
