@@ -9,7 +9,9 @@
 		filteredPlaces:[],
         filteredNames:[],
 		pinPosterLocations:[],
-		animation:"google.maps.Animation.BOUNCE"
+		animation:"google.maps.Animation.BOUNCE",
+        markers:[],
+        infoWindows:[]
 
 	};
 
@@ -82,7 +84,29 @@
        getFilteredNames: function() {
 
          return model.filteredNames;
-       }
+       },
+
+      setMarkers: function(markers) {
+
+        model["markers"]=markers;
+      },
+
+
+      getMarkers: function() {
+
+        return model.markers;
+      },
+
+      setInfoWindows: function(infoWindows) {
+
+        model["infoWindows"]=infoWindows;
+      },
+
+
+      getInfoWindows: function() {
+
+        return model.infoWindows;
+      }
 
 
 
@@ -233,6 +257,9 @@
             var map;
             var locations;
             var markers=[];
+            var infoWindows=[];
+           infoWindows=octopus.getInfoWindows();
+           console.log(infoWindows);
             var mapOptions= {
 
               disableDefaultUI: false
@@ -282,23 +309,34 @@
 					elem.addEventListener('click',(function (placeCopy) {
 
 						return function() {
-
-							//octopus.setPinPosterLocations(placeCopy);
-							//here might be something related to the marker-->setAnimation?
-							//octopus.setAnimation(google.maps.Animation.BOUNCE);
-                            //console.log(markers);
                            console.log(placeCopy);
                             var j=0;
+                            var i=0;
+                            var lengthInfoWindows= infoWindows.length;
                             var length= markers.length;
-                            for(j; j<length; j++) {
+                            //for(j; j<length; j++) {
+
+                              for (i, j; i < lengthInfoWindows,j<length;  i++, j++) {
 
                               var marker= markers[j];
+                              var info = infoWindows[i];
 
-                              if(placeCopy===marker.title) {
+                              //if(placeCopy===marker.title) {
 
-                                marker.setAnimation(google.maps.Animation.BOUNCE);
+                                if(placeCopy==info.content && placeCopy===marker.title) {
 
-                              }
+                                  marker.setAnimation(google.maps.Animation.BOUNCE);
+                                  info.open(map, marker);
+
+
+
+                                 //}
+
+
+                               }
+
+
+                             // }
 
 
                             }
@@ -365,6 +403,7 @@
 
 
 				markers.push(marker);
+                octopus.setMarkers(markers);
                 console.log(markers);
                 //marker.animation();
 
@@ -372,6 +411,9 @@
 				var infoWindow = new google.maps.InfoWindow({
                   content: name//+ ", " +address
               });
+
+               infoWindows.push(infoWindow);
+              octopus.setInfoWindows(infoWindows);
 
 			   google.maps.event.addListener(marker, 'click', function() {
                 infoWindow.open(map, marker);
