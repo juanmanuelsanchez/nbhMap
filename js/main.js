@@ -151,7 +151,7 @@
 
               }).error(function(e){
 
-               $foursquareElem.text("Foursquare articles Could not be loaded");
+               $foursquareElem.text("Sorry, Foursquare articles could not be loaded");
 
              });
 
