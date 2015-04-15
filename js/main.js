@@ -334,9 +334,16 @@
 
                                 if(placeCopy==info.content && placeCopy===marker.title) {
 
-                                  marker.setAnimation(google.maps.Animation.BOUNCE);
-                                  info.open(map, marker);
+                                  if(marker.getAnimation() !=null) {
 
+                                    marker.setAnimation(null);
+
+                                  }else{
+
+                                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                                    info.open(map, marker);
+
+                                  }
 
                                }
 
