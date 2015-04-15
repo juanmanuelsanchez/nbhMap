@@ -321,35 +321,41 @@
 
 						return function() {
 
-                            var j=0;
-                            var i=0;
-                            var lengthInfoWindows= infoWindows.length;
-                            var length= markers.length;
+                          var j = 0;
+                          var i = 0;
+                          var lengthInfoWindows = infoWindows.length;
+                          var length = markers.length;
+                          if (length >= 8) {
 
-                              for (i, j; i < lengthInfoWindows,j<length;  i++, j++) {
+                            for (i, j; i < lengthInfoWindows, j < length; i++, j++) {
 
-                                var marker= markers[j];
-                                var info = infoWindows[i];
+                              var marker = markers[j];
+                              var info = infoWindows[i];
 
+                              if (placeCopy == info.content && placeCopy === marker.title) {
 
-                                if(placeCopy==info.content && placeCopy===marker.title) {
+                                if (marker.getAnimation() != null) {
 
-                                  if(marker.getAnimation() !=null) {
+                                  marker.setAnimation(null);
+                                  info.close(map, marker);
 
-                                    marker.setAnimation(null);
+                                } else {
 
-                                  }else{
+                                  marker.setAnimation(google.maps.Animation.BOUNCE);
+                                  info.open(map, marker);
 
-                                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                                    info.open(map, marker);
+                                }
 
-                                  }
-
-                               }
+                              }
 
                             }
+                          }else{
 
-						}
+                            return;
+                          }
+
+                        }
+
 
 
 					})(filteredPlace));
