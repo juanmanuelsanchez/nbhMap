@@ -126,6 +126,7 @@
         return model.infoWindows;
        }
 
+
     };
 
     //View
@@ -259,7 +260,10 @@
             filteredLocations=octopus.getFilteredPlaces();
 			var placesList=document.getElementById("places-list");
             var showButton= document.getElementById("show");
+            showButton.style.display="none";
             var hideButton= document.getElementById("hide");
+            var list= document.getElementById("places-list");
+
 			var filteredPlace;
 		    var elem;
 			var i=0;
@@ -269,6 +273,7 @@
             var map;
             var locations;
             var markers=[];
+            var markersOnstage=[];
             markers=octopus.getMarkers();
             var infoWindows=[];
             infoWindows=octopus.getInfoWindows();
@@ -284,6 +289,9 @@
                   minChars: 1,
                   onSearchComplete: function(filteredLocations,suggestions) {
                     console.log(suggestions);
+
+                    placesList.style.display="none";
+                    showButton.style.display="inline";
                     var listSuggestions=[];
 
                     for(suggestion in suggestions){
@@ -325,9 +333,10 @@
                           var i = 0;
                           var lengthInfoWindows = infoWindows.length;
                           var length = markers.length;
-                          if (length >= 8) {
+                          var lengthMarkersOnstage= markersOnstage.length;
 
-                            for (i, j; i < lengthInfoWindows, j < length; i++, j++) {
+
+                            for (i, j; i < lengthInfoWindows, j <length; i++, j++) {
 
                               var marker = markers[j];
                               var info = infoWindows[i];
@@ -349,10 +358,6 @@
                               }
 
                             }
-                          }else{
-
-                            return;
-                          }
 
                         }
 
@@ -389,6 +394,8 @@
 
 
                   octopus.setMarkers(marker);
+                  markersOnstage.push(marker);
+                  console.log(markersOnstage);
 
 
                   var infoWindow = new google.maps.InfoWindow({
@@ -436,6 +443,7 @@
                  }
                }
 
+               //Buttons
                showButton.addEventListener('click', function() {
 
                  showMarkers();
@@ -448,6 +456,8 @@
                  clearMarkers();
 
                }, false);
+
+
 
                function setAllMap(map) {
 
@@ -462,7 +472,8 @@
                }
 
               function showMarkers() {
-
+                placesList.style.display="block";
+                showButton.style.display="none";
 			    setAllMap(map);
 
 		      }
@@ -470,7 +481,14 @@
               function clearMarkers() {
 
                 setAllMap(null);
+                if(showButton.style.display=="none") {
+
+                  showButton.style.display = "inline";
+
+                }
               }
+
+
 
 		      window.mapBounds = new google.maps.LatLngBounds();
 
@@ -484,7 +502,7 @@
 
              })
 
-        },
+        }
 
    };
 
