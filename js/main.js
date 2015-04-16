@@ -291,7 +291,11 @@
                     console.log(suggestions);
 
                     placesList.style.display="none";
+                    placesList.style.webkitAnimationName='myAnimation';
+                    placesList.style.webkitAnimationDuration='1s';
                     showButton.style.display="inline";
+                    showButton.style.webkitAnimationName='myAnimation';
+                    showButton.style.webkitAnimationDuration='1s';
                     var listSuggestions=[];
 
                     for(suggestion in suggestions){
@@ -366,6 +370,8 @@
 					})(filteredPlace));
 
 					placesList.appendChild(elem);
+                    placesList.style.webkitAnimationName='myAnimation';
+                    placesList.style.webkitAnimationDuration='1s';
 
 				}
 				octopus.setPinPosterLocations(pinPosterPlaces);
@@ -473,7 +479,11 @@
 
               function showMarkers() {
                 placesList.style.display="block";
+                placesList.style.webkitAnimationName='myAnimation';
+                placesList.style.webkitAnimationDuration='1s';
                 showButton.style.display="none";
+                showButton.style.webkitAnimationName='myAnimation';
+                showButton.style.webkitAnimationDuration='1s';
 			    setAllMap(map);
 
 		      }
