@@ -89,6 +89,18 @@ li:hover {
   z-index: 5;
 
   }
+@-webkit-keyframes myAnimation {
+
+  from {opacity:0;}
+  to {opacity:1;}
+
+}
+
+@keyframes myAnimation {
+
+  from {opacity:0;}
+  to {opacity:1;}
+}
 
 
 /* Mobile Layout: 480px and below. */
