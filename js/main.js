@@ -215,7 +215,7 @@
 
 
            placeNames.sort();
-          //console.log(placeNames);
+          console.log(placeNames);
 
            var regEx1=/Kuma/g;
            var regEx2=/Mao Restaurante/g;
